@@ -1,5 +1,5 @@
-#01. pyqt_basic.py
-#pyqt 파이썬 GUI 프로그래밍
+# 04.pyqt_key_event.py
+# pyqt 키 이벤트
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget
 
@@ -13,6 +13,16 @@ class MyApp(QWidget):
         self.setWindowTitle('MyApp')
         #창 띄우기
         self.show()
+
+    #키를 누를 때
+    def keyPressEvent(self, event):
+        key = event.key()
+        print(str(key) + ' press')
+
+    #키를 땔 때
+    def keyReleaseEvent(self, event):
+        key = event.key()
+        print(str(key) + ' release')
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
