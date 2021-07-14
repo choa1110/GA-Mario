@@ -1,7 +1,8 @@
-# 04. pyqt_key_event.py
-# pyqt 키 이벤트
+#05. pyqt_timer.py
+#pyqt 타이머 예제
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtCore import QTimer
 
 class MyApp(QWidget):
     def __init__(self):
@@ -11,18 +12,19 @@ class MyApp(QWidget):
         self.setFixedSize(400, 300)
         #창 제목 설정
         self.setWindowTitle('MyApp')
+
+        #타이머 생성
+        self.qtimer = QTimer(self)
+        #타이머에 호출할 함수 연결
+        self.qtimer.timeout.connect(self.timer)
+        #1초(=1000밀리초)마다 연결된 함수를 실행
+        self.qtimer.start(1000)
+
         #창 띄우기
         self.show()
 
-    #키를 누를 때
-    def keyPressEvent(self, event):
-        key = event.key()
-        print(str(key) + ' press')
-
-    #키를 땔 때
-    def keyReleaseEvent(self, event):
-        key = event.key()
-        print(str(key) + ' release')
+    def timer(self):
+        print('timer')
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

@@ -9,23 +9,25 @@ class MyApp(QWidget):
         super().__init__()
 
         #창 크기 고정
-        self.setFixedSize(400, 300)
+        self.setFixedSize(200, 200)
         #창 제목 설정
         self.setWindowTitle('MyApp')
+
+        self.keyLabel = QLabel(self)
+        self.keyLabel.setGeometry(0, 0, 200, 200)
+
         #창 띄우기
         self.show()
-
-
 
     #키를 누를 때
     def keyPressEvent(self, event):
         key = event.key()
-        print(str(key) + ' press')
+        self.keyLabel.setText('press ' + str(key))
 
     #키를 땔 때
     def keyReleaseEvent(self, event):
         key = event.key()
-        print(str(key) + ' release')
+        self.keyLabel.setText('release ' + str(key))
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
