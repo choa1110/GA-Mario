@@ -7,11 +7,6 @@ from PyQt5.QtCore import QTimer
 
 import numpy as np
 
-env = retro.make(game='SuperMarioBros-Nes', state='Level1-1')
-env.reset()
-
-screen = env.get_screen()
-
 class MyApp(QWidget):
     def __init__(self):
         super().__init__()
@@ -20,6 +15,10 @@ class MyApp(QWidget):
         self.setFixedSize(240, 224)
         #창 제목 설정
         self.setWindowTitle('GA-mario')
+
+        self.env = retro.make(game='SuperMarioBros-Nes', state='Level1-1')
+        self.env.reset()
+        screen = self.env.get_screen()
 
         #타이머 생성
         self.qtimer = QTimer(self)
@@ -43,21 +42,6 @@ class MyApp(QWidget):
     def keyPressEvent(self, event):
         key = event.key()
         if key == Qt.Key_UP:
-            self.release_buttons[4] = 0
-        elif key == Qt.Key_Down:
-            self.release_buttons[5] = 0
-        elif key == Qt.Key_Down:
-            self.release_buttons[6] = 0
-        elif key == Qt.Key_Down:
-            self.release_buttons[7] = 0
-        elif key == Qt.Key_Down:
-            self.release_buttons[8] = 0
-        elif key == Qt.Key_Down:
-            self.release_buttons[0] = 0
-
-    def keyReleaseEvent(self, event):
-        key = event.key()
-        if key == Qt.Key_UP:
             self.press_buttons[4] = 0
         elif key == Qt.Key_Down:
             self.press_buttons[5] = 0
@@ -70,6 +54,21 @@ class MyApp(QWidget):
         elif key == Qt.Key_Down:
             self.press_buttons[0] = 0
 
+    def keyReleaseEvent(self, event):
+        key = event.key()
+        if key == Qt.Key_UP:
+            self.release_buttons[4] = 0
+        elif key == Qt.Key_Down:
+            self.release_buttons[5] = 0
+        elif key == Qt.Key_Down:
+            self.release_buttons[6] = 0
+        elif key == Qt.Key_Down:
+            self.release_buttons[7] = 0
+        elif key == Qt.Key_Down:
+            self.release_buttons[8] = 0
+        elif key == Qt.Key_Down:
+            self.release_buttons[0] = 0
+
     def update(self):
         #게임 화면 출력
         self.screen = self.get_screen()
@@ -80,6 +79,10 @@ class MyApp(QWidget):
 
     def game_timer(self):
         self.env.step(np.array([0, 0, 0, 0, 0, 0, 0, 0, 0]))
+        self.update_screen()
+
+    def update_game(self):
+        self.env.step(self.press_buttons)
         self.update_screen()
 
 
