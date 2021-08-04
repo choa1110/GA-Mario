@@ -18,76 +18,63 @@ class MyApp(QWidget):
 
         self.env = retro.make(game='SuperMarioBros-Nes', state='Level1-1')
         self.env.reset()
+
         screen = self.env.get_screen()
 
         #타이머 생성
         self.qtimer = QTimer(self)
         #타이머에 호출할 함수 연결
-
-        #self.qtimer.timeout.connect(self.game_timer)
-        self.qtimer.timeout.connect(self.updateScreen)
-        #self.qtimer.timeout.connect(self.update_game)
-
+        self.qtimer.timeout.connect(self.game_timer)
         #1초(=1000밀리초)마다 연결된 함수를 실행
         self.qtimer.start(1000)
 
         #이미지
-        label_image = QLabel(self)
+        image = np.array(screen)
         qimage = QImage(screen, screen.shape[1], screen.shape[0], QImage.Format_RGB888)
         pixmap = QPixmap(qimage)
-        self.setFixedSize(480, 448)
-        pixmap = pixmap.scaled(480, 448, Qt.IgnoreAspectRatio)
+        pixmap = pixmap.scaled(self.screen_width, self.screen_hight, Qt.IgnoreAspectRatio)
 
-        label_image.setPixmap(pixmap)
+        self.label_image.setPixmap(pixmap)
 
         #창 띄우기
         self.show()
 
-    # def keyPressEvent(self, event):
-    #     key = event.key()
-    #     if key == Qt.Key_UP:
-    #         self.press_buttons[4] = 0
-    #     elif key == Qt.Key_Down:
-    #         self.press_buttons[5] = 0
-    #     elif key == Qt.Key_Down:
-    #         self.press_buttons[6] = 0
-    #     elif key == Qt.Key_Down:
-    #         self.press_buttons[7] = 0
-    #     elif key == Qt.Key_Down:
-    #         self.press_buttons[8] = 0
-    #     elif key == Qt.Key_Down:
-    #         self.press_buttons[0] = 0
+    def timer(self):
+        self.env.step(np.array([0, 0, 0, 0, 0, 0, 0, 0, 0]))
 
-    # def keyReleaseEvent(self, event):
-    #     key = event.key()
-    #     if key == Qt.Key_UP:
-    #         self.release_buttons[4] = 0
-    #     elif key == Qt.Key_Down:
-    #         self.release_buttons[5] = 0
-    #     elif key == Qt.Key_Down:
-    #         self.release_buttons[6] = 0
-    #     elif key == Qt.Key_Down:v
-    #         self.release_buttons[7] = 0
-    #     elif key == Qt.Key_Down:
-    #         self.release_buttons[8] = 0
-    #     elif key == Qt.Key_Down:
-    #         self.release_buttons[0] = 0
+        #변경된 게임 화면을 가져와서 화면에 표시
+        self.update_screen()
 
-    def updateScreen(self):
-        #게임 화면 출력
-        self.screen = self.get_screen()
-        screen_qimage = QImage(self.screen, self.screen.shape[1], self.screen.shape[0], QImage.Format)
-        pixmap = QPixmap(screen_qimage)
-        pixmap = pixmap.scaled(self.screen_width, self.screen_height, Qt.IgnoreAspectRatio)
-        self.screen_label.setPixmap(pixmap)
 
-    # def game_timer(self):
-    #     self.env.step(np.array([0, 0, 0, 0, 0, 0, 0, 0, 0]))
-    #     self.update_screen()
+    def keyPressEvent(self, event):
+        key = event.key()
+        if key == Qt.Key_UP:
+            self.press_buttons[4] = 1
+        elif key == Qt.Key_Down:
+            self.press_buttons[5] = 1
+        elif key == Qt.Key_Down:
+            self.press_buttons[6] = 1
+        elif key == Qt.Key_Down:
+            self.press_buttons[7] = 1
+        elif key == Qt.Key_Down:
+            self.press_buttons[8] = 1
+        elif key == Qt.Key_Down:
+            self.press_buttons[0] = 1
 
-    # def update_game(self):
-    #     self.env.step(self.press_buttons)
-    #     self.update_screen()
+    def keyReleaseEvent(self, event):
+        key = event.key()
+        if key == Qt.Key_UP:
+            self.release_buttons[4] = 0
+        elif key == Qt.Key_Down:
+            self.release_buttons[5] = 0
+        elif key == Qt.Key_Down:
+            self.release_buttons[6] = 0
+        elif key == Qt.Key_Down:
+            self.release_buttons[7] = 0
+        elif key == Qt.Key_Down:
+            self.release_buttons[8] = 0
+        elif key == Qt.Key_Down:
+            self.release_buttons[0] = 0
 
 
 if __name__ == '__main__':
