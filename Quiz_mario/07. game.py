@@ -22,7 +22,7 @@ class MyApp(QWidget):
         self.label_image = QLabel(self)
 
         # 게임 환경 생성
-        self.env = retro.make(game='SuperMarioBros-Nes', state='Level2-1')
+        self.env = retro.make(game='SuperMarioBros-Nes', state='Level1-1')
         # 새 게임 시작
         self.env.reset()
         # 화면 가져오기
@@ -56,6 +56,12 @@ class MyApp(QWidget):
         # self.env.step(np.array([0, 0, 0, 0, 0, 0, 0, 0, 0]))
         self.env.step(self.press_buttons)
         self.update_screen()
+        ram = self.env.get_ram()
+
+        enemy_drawn = ram[0x000F:0x0013 + 1]
+
+        print(enemy_drawn)
+
 
     def keyPressEvent(self, event):
         key = event.key()
