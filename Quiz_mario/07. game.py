@@ -58,10 +58,6 @@ class MyApp(QWidget):
         self.update_screen()
         ram = self.env.get_ram()
 
-        enemy_drawn = ram[0x000F:0x0013 + 1]
-
-        print(enemy_drawn)
-
 
     def keyPressEvent(self, event):
         key = event.key()

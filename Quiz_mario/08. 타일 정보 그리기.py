@@ -1,5 +1,6 @@
 import retro
 import sys
+from PyQt5.QtGui import QPainter, QPen, QBrush, QColor
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtWidgets import QApplication, \
@@ -12,7 +13,7 @@ class MyApp(QWidget):
         super().__init__()
 
         #창 크기 고정
-        self.setFixedSize(480, 448)
+        self.setFixedSize(1080, 448)
         #창 제목 설정
         self.setWindowTitle('GA-mario')
 
@@ -57,10 +58,7 @@ class MyApp(QWidget):
         self.env.step(self.press_buttons)
         self.update_screen()
         ram = self.env.get_ram()
-
-        enemy_drawn = ram[0x000F:0x0013 + 1]
-
-        print(enemy_drawn)
+        self.update()
 
 
     def keyPressEvent(self, event):
@@ -93,6 +91,17 @@ class MyApp(QWidget):
         elif key == Qt.Key_B:
             self.press_buttons[0] = 0
 
+        #그리기 도구
+        painter = QPainter()
+        #그리기 시작
+        painter.begin(self)
+
+        #RGB색상으로 펜 설정
+        painter.setPen(QPen(QColor.fromRgb(255, 0, 0), 3.0, Qt.SolidLine))
+        #브러쉬 설정(채우기)
+        painter.setBrush(QBrush(Qt.blue))
+        #직사각형 그리기
+        painter.drawRect(300, 500, 100, 100)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
