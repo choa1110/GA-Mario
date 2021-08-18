@@ -58,6 +58,7 @@ class MyApp(QWidget):
         self.env.step(self.press_buttons)
         self.update_screen()
         ram = self.env.get_ram()
+
         self.update()
 
 
@@ -91,17 +92,28 @@ class MyApp(QWidget):
         elif key == Qt.Key_B:
             self.press_buttons[0] = 0
 
+    def paintEvent(self, event):
         #그리기 도구
         painter = QPainter()
         #그리기 시작
         painter.begin(self)
 
+        # #RGB색상으로 펜 설정
+        # painter.setPen(QPen(QColor.fromRgb(255, 255, 255), 0, Qt.SolidLine))
+        # #브러쉬 설정(채우기)
+        # painter.setBrush(QBrush(Qt.blue))
+        # #직사각형 그리기
+        # painter.drawRect(480, 0, 500, 100)
+
         #RGB색상으로 펜 설정
-        painter.setPen(QPen(QColor.fromRgb(255, 0, 0), 3.0, Qt.SolidLine))
+        painter.setPen(QPen(QColor.fromRgb(255, 255, 255), 0, Qt.SolidLine))
         #브러쉬 설정(채우기)
-        painter.setBrush(QBrush(Qt.blue))
-        #직사각형 그리기
-        painter.drawRect(300, 500, 100, 100)
+        painter.setBrush(QBrush(Qt.green))
+        i=3
+        j=5
+        painter.drawRect(480+16*i, 16*j, 16, 16)
+
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
