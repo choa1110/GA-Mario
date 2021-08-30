@@ -129,6 +129,21 @@ class MyApp(QWidget):
                     painter.setBrush(QBrush(Qt.gray))
                     painter.drawRect(480+16*j, 16*i, 16, 16)
 
+
+
+        full_screen_page1_tile = full_screen_tiles[:full_screen_tile_count//2].reshape((13, 16))
+        for i in range(screen_tiles.shape[0]):
+            for j in range(screen_tiles.shape[1]):
+                if full_screen_tiles[i][j] != 0:
+                    #브러쉬 설정(채우기)
+                    painter.setBrush(QBrush(Qt.green))
+                    painter.drawRect(800+16*j, 16*i, 16, 16)
+
+                if full_screen_tiles[i][j] == 0:
+                    painter.setBrush(QBrush(Qt.gray))
+                    painter.drawRect(800+16*j, 16*i, 16, 16)
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = MyApp()

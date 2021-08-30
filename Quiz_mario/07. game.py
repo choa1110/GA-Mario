@@ -22,7 +22,7 @@ class MyApp(QWidget):
         self.label_image = QLabel(self)
 
         # 게임 환경 생성
-        self.env = retro.make(game='SuperMarioBros-Nes', state='Level1-1')
+        self.env = retro.make(game='SuperMarioBros-Nes', state='Level8-1')
         # 새 게임 시작
         self.env.reset()
         # 화면 가져오기
