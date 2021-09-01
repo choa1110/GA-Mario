@@ -154,6 +154,23 @@ class MyApp(QWidget):
                     painter.drawRect(480+16*j, 230+16*i, 16, 16)
 
 
+
+        # 현재 화면 속 플레이어 x좌표
+        player_position_x = ram[0x03AD]
+        # 0x03B8  Player y pos within current screen
+        # 현재 화면 속 플레이어 y좌표
+        player_position_y = ram[0x03B8]
+
+        # 타일 좌표로 변환
+        player_tile_position_x = (player_position_x + 8) // 16
+        player_tile_position_y = (player_position_y + 8) // 16 - 1
+
+
+        painter.setBrush(QBrush(Qt.red))
+        painter.drawRect(480+16*player_tile_position_x, 230+16*player_tile_position_y, 16, 16)
+
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = MyApp()
