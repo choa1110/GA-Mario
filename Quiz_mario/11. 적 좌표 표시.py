@@ -39,7 +39,7 @@ class MyApp(QWidget):
         #타이머에 호출할 함수 연결
         self.qtimer.timeout.connect(self.game_timer)
         #1초(1000밀리초)마다 연결된 함수를 실행
-        self.qtimer.start(1000 / 60)
+        self.qtimer.start(1000 // 60)
 
         self.show()
 
@@ -98,12 +98,6 @@ class MyApp(QWidget):
         #그리기 시작
         painter.begin(self)
 
-        # #RGB색상으로 펜 설정
-        # painter.setPen(QPen(QColor.fromRgb(255, 255, 255), 0, Qt.SolidLine))
-        # #브러쉬 설정(채우기)
-        # painter.setBrush(QBrush(Qt.blue))
-        # #직사각형 그리기
-        # painter.drawRect(480, 0, 500, 100)
 
         #RGB색상으로 펜 설정
         painter.setPen(QPen(QColor.fromRgb(255, 255, 255), 0, Qt.SolidLine))
@@ -129,6 +123,33 @@ class MyApp(QWidget):
                     painter.setBrush(QBrush(Qt.gray))
                     painter.drawRect(480+16*j, 16*i, 16, 16)
 
+        current_screen_page = ram[0x071A]
+        # 자신이 속한 화면 페이지 번호
+        enemy_horizon_position = ram[0x006E:0x0072 + 1]
+        # 0x0087-0x008B Enemy x position on screen
+        # 자신이 속한 페이지 속 x 좌표
+        enemy_screen_position_x = ram[0x0087:0x008B + 1]
+        # 0x00CF-0x00d3 Enemy y pos on screen
+        enemy_position_y = ram[0x00CF:0x00d3 + 1]
+        # 적 x 좌표
+        enemy_position_x = (enemy_horizon_position * 256 + enemy_screen_position_x) % 512
+
+        # enemy_position_x = ram[0x0087:0x008B + 1]
+        # enemy_position_y = ram[0x00CF:0x00d3 + 1]
+        # 적 타일 좌표
+        enemy_tile_position_x = (enemy_position_x + 8) // 16
+        enemy_tile_position_y = (enemy_position_y - 8) // 16 - 1
+
+        enemy_drawn = ram[0x000F:0x0013 + 1]
+        for i in range(5):
+            if enemy_drawn[i] == 1:
+                painter.setBrush(QBrush(Qt.blue))
+                painter.drawRect(480+16*enemy_tile_position_x[i], 16*enemy_tile_position_y[i], 16, 16)
+
+                ey = enemy_tile_position_y[i]
+                ex = enemy_tile_position_x[i]
+                if 0 <= ex < full_screen_tiles.shape[1] and 0 <= ey < full_screen_tiles.shape[0]:
+                    full_screen_tiles[ey][ex] = -1
 
         current_screen_page = ram[0x071A]
         # 0x071C	ScreenEdge X-Position, loads next screen when player past it?
@@ -141,19 +162,19 @@ class MyApp(QWidget):
 
         # 현재 화면 추출
         screen_tiles = np.concatenate((full_screen_tiles, full_screen_tiles), axis=1)[:, screen_tile_offset:screen_tile_offset+16]
-
         for i in range(screen_tiles.shape[0]):
             for j in range(screen_tiles.shape[1]):
-                if screen_tiles[i][j] != 0:
-                    #브러쉬 설정(채우기)
+                if screen_tiles[i][j] > 0:
+                    screen_tiles[i][j] = 1
                     painter.setBrush(QBrush(Qt.green))
-                    painter.drawRect(480+16*j, 230+16*i, 16, 16)
 
-                if screen_tiles[i][j] == 0:
+                elif screen_tiles[i][j] == -1:
+                    screen_tiles[i][j] = 2
+                    painter.setBrush(QBrush(Qt.blue))
+
+                else:
                     painter.setBrush(QBrush(Qt.gray))
-                    painter.drawRect(480+16*j, 230+16*i, 16, 16)
-
-
+                painter.drawRect(480+16*j, 230+16*i, 16, 16)
 
         # 현재 화면 속 플레이어 x좌표
         player_position_x = ram[0x03AD]
@@ -165,10 +186,8 @@ class MyApp(QWidget):
         player_tile_position_x = (player_position_x + 8) // 16
         player_tile_position_y = (player_position_y + 8) // 16 - 1
 
-
         painter.setBrush(QBrush(Qt.red))
         painter.drawRect(480+16*player_tile_position_x, 230+16*player_tile_position_y, 16, 16)
-
 
 
 if __name__ == '__main__':

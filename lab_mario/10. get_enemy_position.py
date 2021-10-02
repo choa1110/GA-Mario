@@ -21,6 +21,6 @@ print(enemy_position_x, enemy_position_y)
 
 # 적 타일 좌표
 enemy_tile_position_x = (enemy_position_x + 8) // 16
-enemy_tile_position_y = (enemy_position_y + 8) // 16 - 1
+enemy_tile_position_y = (enemy_position_y - 8) // 16 - 1
 
 print(enemy_tile_position_x, enemy_tile_position_y)

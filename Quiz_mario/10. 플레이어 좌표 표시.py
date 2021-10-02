@@ -98,13 +98,6 @@ class MyApp(QWidget):
         #그리기 시작
         painter.begin(self)
 
-        # #RGB색상으로 펜 설정
-        # painter.setPen(QPen(QColor.fromRgb(255, 255, 255), 0, Qt.SolidLine))
-        # #브러쉬 설정(채우기)
-        # painter.setBrush(QBrush(Qt.blue))
-        # #직사각형 그리기
-        # painter.drawRect(480, 0, 500, 100)
-
         #RGB색상으로 펜 설정
         painter.setPen(QPen(QColor.fromRgb(255, 255, 255), 0, Qt.SolidLine))
         ram = self.env.get_ram()
@@ -128,7 +121,6 @@ class MyApp(QWidget):
                 if full_screen_tiles[i][j] == 0:
                     painter.setBrush(QBrush(Qt.gray))
                     painter.drawRect(480+16*j, 16*i, 16, 16)
-
 
         current_screen_page = ram[0x071A]
         # 0x071C	ScreenEdge X-Position, loads next screen when player past it?
