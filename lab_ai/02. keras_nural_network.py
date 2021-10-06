@@ -13,7 +13,7 @@ data = np.random.randint(0, 3, (13 * 16), dtype=np.int)
 print(data)
 
 predict = model.predict(np.array([data]))[0]
-print(predict) 
+print(predict)
 
 result = (predict > 0.5).astype(np.int)
 print(result)
