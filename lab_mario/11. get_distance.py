@@ -11,7 +11,7 @@ player_horizon_position = ram[0x006D]
 # 0x03B8   Player x position on screen
 # 페이지 속 플레이어 x 좌표
 player_screen_position_x = ram[0x0086]
-
+ 
 distance = 256 * player_horizon_position + player_screen_position_x
 
 print(distance)
