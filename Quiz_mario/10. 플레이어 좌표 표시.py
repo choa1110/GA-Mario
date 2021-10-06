@@ -121,7 +121,7 @@ class MyApp(QWidget):
                 if full_screen_tiles[i][j] == 0:
                     painter.setBrush(QBrush(Qt.gray))
                     painter.drawRect(480+16*j, 16*i, 16, 16)
-
+ 
         current_screen_page = ram[0x071A]
         # 0x071C	ScreenEdge X-Position, loads next screen when player past it?
         # 페이지 속 현재 화면 위치
