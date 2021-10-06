@@ -15,7 +15,7 @@ class MyApp(QWidget):
 
         self.keyLabel = QLabel(self)
         self.keyLabel.setGeometry(0, 0, 200, 200)
- 
+
         #창 띄우기
         self.show()
 
