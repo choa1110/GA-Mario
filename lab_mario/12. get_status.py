@@ -7,7 +7,7 @@ env.reset()
 ram = env.get_ram()
 
 # 0x001D	Player "float" state
-# 0x03 - 클리어
+# 0x03 - 클리어 
 player_float_state = ram[0x001D]
 print(player_float_state)
 
