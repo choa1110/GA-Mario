@@ -7,7 +7,7 @@ import numpy as np
 
 
 class MyApp(QWidget):
-    def __init__(self): 
+    def __init__(self):
         super().__init__()
 
         #창 크기 고정
