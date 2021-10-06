@@ -22,7 +22,7 @@ class MyApp(QWidget):
 
         #창 띄우기
         self.show()
- 
+
     def timer(self):
         print('timer')
 
