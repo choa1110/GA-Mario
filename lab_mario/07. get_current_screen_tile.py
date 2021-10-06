@@ -34,5 +34,5 @@ screen_tile_offset = screen_offset // 16
 
 # 현재 화면 추출
 screen_tiles = np.concatenate((full_screen_tiles, full_screen_tiles), axis=1)[:, screen_tile_offset:screen_tile_offset+16]
-
+ 
 print(screen_tiles)
