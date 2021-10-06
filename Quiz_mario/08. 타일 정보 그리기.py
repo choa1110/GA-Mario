@@ -111,7 +111,7 @@ class MyApp(QWidget):
         full_screen_tiles = ram[0x0500:0x069F+1]
 
         full_screen_tile_count = full_screen_tiles.shape[0]
- 
+
         full_screen_page1_tile = full_screen_tiles[:full_screen_tile_count//2].reshape((13, 16))
         full_screen_page2_tile = full_screen_tiles[full_screen_tile_count//2:].reshape((13, 16))
 
