@@ -217,7 +217,7 @@ class Mario(QWidget):
                 ex = enemy_tile_position_x[i]
                 if 0 <= ex < full_screen_tiles.shape[1] and 0 <= ey < full_screen_tiles.shape[0]:
                     full_screen_tiles[ey][ex] = -1
-
+ 
         painter.setPen(QPen(Qt.black))
 
         current_screen_page = ram[0x071A]
