@@ -47,7 +47,7 @@ class GeneticAlgorithm:
 
     def mutation(self, chromosome):
         pass
-
+ 
     def next_generation(self):
         next_chromosomes = []
         for i in range(5):
