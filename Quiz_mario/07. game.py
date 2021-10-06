@@ -10,7 +10,7 @@ import numpy as np
 class MyApp(QWidget):
     def __init__(self):
         super().__init__()
-
+ 
         #창 크기 고정
         self.setFixedSize(480, 448)
         #창 제목 설정
