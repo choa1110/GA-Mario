@@ -6,7 +6,7 @@ env.reset()
 
 ram = env.get_ram()
 
-print(ram.shape) 
+print(ram.shape)
 print(ram)
 
 print(ram[0xe])
