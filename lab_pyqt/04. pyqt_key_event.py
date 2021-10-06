@@ -11,7 +11,7 @@ class MyApp(QWidget):
         self.setFixedSize(400, 300)
         #창 제목 설정
         self.setWindowTitle('MyApp')
-        #창 띄우기 
+        #창 띄우기
         self.show()
 
     #키를 누를 때
