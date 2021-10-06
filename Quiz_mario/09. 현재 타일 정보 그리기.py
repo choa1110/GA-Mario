@@ -141,7 +141,7 @@ class MyApp(QWidget):
 
         # 현재 화면 추출
         screen_tiles = np.concatenate((full_screen_tiles, full_screen_tiles), axis=1)[:, screen_tile_offset:screen_tile_offset+16]
-
+ 
         for i in range(screen_tiles.shape[0]):
             for j in range(screen_tiles.shape[1]):
                 if screen_tiles[i][j] != 0:
