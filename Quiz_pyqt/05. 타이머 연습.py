@@ -19,7 +19,7 @@ class MyApp(QWidget):
         self.qtimer.timeout.connect(self.timer)
         #1초(=1000밀리초)마다 연결된 함수를 실행
         self.qtimer.start(1000)
-
+ 
         #창 띄우기
         self.show()
 
