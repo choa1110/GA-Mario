@@ -99,4 +99,4 @@ class MyApp(QWidget):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = MyApp()
-    sys.exit(app.exec_()) 
+    sys.exit(app.exec_())
