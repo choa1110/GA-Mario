@@ -116,7 +116,7 @@ class GeneticAlgorithm:
     def next_generation(self):
         # 저장
         if not os.path.exists('../data'):
-            os.mkdir('../data')
+            os.mkdir('../data') 
         if not os.path.exists(f'../data/{self.generation}'):
             os.mkdir(f'../data/{self.generation}')
         for i in range(10):
