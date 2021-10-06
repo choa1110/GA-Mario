@@ -11,7 +11,7 @@ class MyApp(QWidget):
         self.setWindowTitle('GA Mario')
         #창 띄우기
         self.show()
- 
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = MyApp()
