@@ -7,7 +7,7 @@ env.reset()
 
 ram = env.get_ram()
 
- 
+
 # 0x03AD  Player x pos within current screen offset
 # 현재 화면 속 플레이어 x좌표
 player_position_x = ram[0x03AD]
