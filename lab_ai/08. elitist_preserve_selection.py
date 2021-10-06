@@ -42,4 +42,4 @@ if __name__ == '__main__':
         print(chromosome.fitness(), end=' ')
     print()
     print('== 선택된 염색체의 적합도 ==')
-    print(selected_chromosome[0].fitness(), selected_chromosome[1].fitness()) 
+    print(selected_chromosome[0].fitness(), selected_chromosome[1].fitness())
