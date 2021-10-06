@@ -28,7 +28,7 @@ class Chromosome:
 
     def fitness(self):
         return self.distance
-
+ 
 
 def roulette_wheel_selection(chromosomes):
     result = []
