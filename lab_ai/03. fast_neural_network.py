@@ -20,7 +20,7 @@ class Model:
         l2 = np.matmul(l1_output, self.w2) + self.b2
         l2_output = self.sigmoid(l2)
 
-        predict = l2_output 
+        predict = l2_output
         print(predict)
 
         result = (predict > 0.5).astype(np.int)
