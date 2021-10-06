@@ -20,7 +20,7 @@ class MyApp(QWidget):
         button.setText('버튼')
         button.setGeometry(100, 100, 50, 50)
 
-        #텍스트
+        #텍스트 
         label_text = QLabel(self)
         label_text.setText('가나다')
         label_text.setGeometry(200, 150, 50, 100)
