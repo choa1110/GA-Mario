@@ -10,7 +10,7 @@ class Chromosome:
     def __init__(self):
         self.w1 = np.random.uniform(low=-1, high=1, size=(13 * 16, 9))
         self.b1 = np.random.uniform(low=-1, high=1, size=(9,))
- 
+
         self.w2 = np.random.uniform(low=-1, high=1, size=(9, 6))
         self.b2 = np.random.uniform(low=-1, high=1, size=(6,))
 
