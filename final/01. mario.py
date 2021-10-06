@@ -186,7 +186,7 @@ class MyApp(QWidget):
 
         enemy_tile_position_x = (enemy_position_x + 8) // 16
         enemy_tile_position_y = (enemy_position_y - 8) // 16 - 1
- 
+
         for i in range(5):
             if enemy_drawn[i] == 1:
                 ey = enemy_tile_position_y[i]
